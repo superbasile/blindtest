@@ -14,13 +14,20 @@ function onYouTubeIframeAPIReady() {
         width: '300',
         videoId: '',
         events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
     });
 }
 
 function onPlayerReady(event) {
     loadSong(currentSongIndex);
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        // Action à effectuer lorsque la vidéo se termine
+    }
 }
 
 const playButton = document.getElementById('playButton');
@@ -57,3 +64,4 @@ submitAnswerButton.addEventListener('click', () => {
     currentSongIndex++;
     loadSong(currentSongIndex);
 });
+
