@@ -1,7 +1,6 @@
-// script.js
 const songs = [
-    { src: "song1.mp3", answer: "Song Title 1" },
-    { src: "song2.mp3", answer: "Song Title 2" },
+    { src: "https://www.youtube.com/watch?v=VIDEO_ID_1", answer: "Song Title 1" },
+    { src: "https://www.youtube.com/watch?v=VIDEO_ID_2", answer: "Song Title 2" },
     // Ajoutez plus de chansons ici
 ];
 
@@ -21,11 +20,14 @@ function loadSong(index) {
         document.getElementById('game').style.display = 'none';
         return;
     }
-    audioElement.src = songs[index].src;
+    // Utilisation de l'API de YouTube pour intégrer la vidéo
+    const videoId = new URL(songs[index].src).searchParams.get('v');
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1`;
+    audioElement.src = embedUrl;
 }
 
 playButton.addEventListener('click', () => {
-    audioElement.play();
+    audioElement.src += '&autoplay=1';
 });
 
 submitAnswerButton.addEventListener('click', () => {
